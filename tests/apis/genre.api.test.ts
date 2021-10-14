@@ -3,30 +3,30 @@ import request from 'supertest';
 import app from '../../app';
 import db from '../../config/database.config';
 
-const mainApiURL = `/api/v1/developers`;
+const mainApiURL = `/api/v1/genres`;
 
 const invalidDataList = [
   {
-    developerName: '',
+    genreName: '',
   },
   {},
 ];
 
 let createdRecordID: number;
 
-describe('Developers API', () => {
+describe('Genres API', () => {
   beforeAll(async () => {
     await db.sync();
   });
 
-  test(`POST ${mainApiURL} -> create and return a new developer`, async () => {
-    const newDeveloper = {
-      developerName: 'THQ',
+  test(`POST ${mainApiURL} -> create and return a new genre`, async () => {
+    const newGenre = {
+      genreName: 'Horror',
     };
 
     const response = await request(app)
       .post(`${mainApiURL}`)
-      .send(newDeveloper)
+      .send(newGenre)
       .expect('Content-Type', /json/)
       .expect(201);
 
@@ -35,7 +35,7 @@ describe('Developers API', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        developerName: expect.any(String),
+        genreName: expect.any(String),
       })
     );
   });
@@ -59,7 +59,7 @@ describe('Developers API', () => {
     }
   });
 
-  test(`GET ${mainApiURL} -> array of developers`, async () => {
+  test(`GET ${mainApiURL} -> array of genres`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}`)
       .expect('Content-Type', /json/)
@@ -69,13 +69,13 @@ describe('Developers API', () => {
       expect.arrayContaining([
         expect.objectContaining({
           id: expect.any(Number),
-          developerName: expect.any(String),
+          genreName: expect.any(String),
         }),
       ])
     );
   });
 
-  test(`GET ${mainApiURL}/id -> a developer`, async () => {
+  test(`GET ${mainApiURL}/id -> a genre`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}/${createdRecordID}`)
       .expect('Content-Type', /json/)
@@ -84,7 +84,7 @@ describe('Developers API', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        developerName: expect.any(String),
+        genreName: expect.any(String),
       })
     );
   });
@@ -117,26 +117,26 @@ describe('Developers API', () => {
     );
   });
 
-  test(`PUT ${mainApiURL}/id -> return the updated developer`, async () => {
-    const modifiedDeveloper = {
-      developerName: 'United Front',
+  test(`PUT ${mainApiURL}/id -> return the updated genre`, async () => {
+    const modifiedGenre = {
+      genreName: 'Action',
     };
 
     const response = await request(app)
       .put(`${mainApiURL}/${createdRecordID}`)
-      .send(modifiedDeveloper)
+      .send(modifiedGenre)
       .expect('Content-Type', /json/)
       .expect(200);
 
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        developerName: expect.any(String),
+        genreName: expect.any(String),
       })
     );
   });
 
-  test(`DELETE ${mainApiURL}/id -> return the deleted developer`, async () => {
+  test(`DELETE ${mainApiURL}/id -> return the deleted genre`, async () => {
     const response = await request(app)
       .delete(`${mainApiURL}/${createdRecordID}`)
       .expect('Content-Type', /json/)
@@ -145,7 +145,7 @@ describe('Developers API', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        developerName: expect.any(String),
+        genreName: expect.any(String),
       })
     );
   });
