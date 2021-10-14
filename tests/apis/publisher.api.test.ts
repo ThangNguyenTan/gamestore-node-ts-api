@@ -3,30 +3,30 @@ import request from 'supertest';
 import app from '../../app';
 import db from '../../config/database.config';
 
-const mainApiURL = `/api/v1/todos`;
+const mainApiURL = `/api/v1/publishers`;
 
 const invalidDataList = [
   {
-    title: '',
+    publisherName: '',
   },
   {},
 ];
 
 let createdRecordID: number;
 
-describe('Todos API', () => {
+describe('Publishers API', () => {
   beforeAll(async () => {
     await db.sync();
   });
 
-  test(`POST ${mainApiURL} -> create and return a new todo`, async () => {
-    const newTodo = {
-      title: 'Do Homework',
+  test(`POST ${mainApiURL} -> create and return a new publisher`, async () => {
+    const newPublisher = {
+      publisherName: 'Samsung',
     };
 
     const response = await request(app)
       .post(`${mainApiURL}`)
-      .send(newTodo)
+      .send(newPublisher)
       .expect('Content-Type', /json/)
       .expect(201);
 
@@ -35,8 +35,7 @@ describe('Todos API', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        title: expect.any(String),
-        completed: expect.any(Boolean),
+        publisherName: expect.any(String),
       })
     );
   });
@@ -60,7 +59,7 @@ describe('Todos API', () => {
     }
   });
 
-  test(`GET ${mainApiURL} -> array of todos`, async () => {
+  test(`GET ${mainApiURL} -> array of publishers`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}`)
       .expect('Content-Type', /json/)
@@ -70,14 +69,13 @@ describe('Todos API', () => {
       expect.arrayContaining([
         expect.objectContaining({
           id: expect.any(Number),
-          title: expect.any(String),
-          completed: expect.any(Boolean),
+          publisherName: expect.any(String),
         }),
       ])
     );
   });
 
-  test(`GET ${mainApiURL}/id -> a todo`, async () => {
+  test(`GET ${mainApiURL}/id -> a publisher`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}/${createdRecordID}`)
       .expect('Content-Type', /json/)
@@ -86,8 +84,7 @@ describe('Todos API', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        title: expect.any(String),
-        completed: expect.any(Boolean),
+        publisherName: expect.any(String),
       })
     );
   });
@@ -120,28 +117,26 @@ describe('Todos API', () => {
     );
   });
 
-  test(`PUT ${mainApiURL}/id -> return the updated todo`, async () => {
-    const modifiedTodo = {
-      title: 'Do Homework 123',
-      completed: true,
+  test(`PUT ${mainApiURL}/id -> return the updated publisher`, async () => {
+    const modifiedPublisher = {
+      publisherName: 'Sony',
     };
 
     const response = await request(app)
       .put(`${mainApiURL}/${createdRecordID}`)
-      .send(modifiedTodo)
+      .send(modifiedPublisher)
       .expect('Content-Type', /json/)
       .expect(200);
 
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        title: expect.any(String),
-        completed: expect.any(Boolean),
+        publisherName: expect.any(String),
       })
     );
   });
 
-  test(`DELETE ${mainApiURL}/id -> return the deleted todo`, async () => {
+  test(`DELETE ${mainApiURL}/id -> return the deleted publisher`, async () => {
     const response = await request(app)
       .delete(`${mainApiURL}/${createdRecordID}`)
       .expect('Content-Type', /json/)
@@ -150,8 +145,7 @@ describe('Todos API', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
-        title: expect.any(String),
-        completed: expect.any(Boolean),
+        publisherName: expect.any(String),
       })
     );
   });
