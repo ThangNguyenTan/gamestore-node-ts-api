@@ -16,7 +16,9 @@ let createdRecordID: number;
 
 describe('Features API', () => {
   beforeAll(async () => {
-    await db.sync();
+    await db.sync({
+      logging: false,
+    });
   });
 
   test(`POST ${mainApiURL} -> create and return a new feature`, async () => {

@@ -11,7 +11,9 @@ describe('Genres Services', () => {
   let createdRecordID: number | undefined;
 
   beforeAll(async () => {
-    await db.sync();
+    await db.sync({
+      logging: false,
+    });
   });
 
   test(`Create Genre Function`, async () => {

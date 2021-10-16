@@ -23,7 +23,9 @@ const invalidDataList = [
 
 describe('Users API', () => {
   beforeAll(async () => {
-    await db.sync();
+    await db.sync({
+      logging: false,
+    });
   });
 
   test(`POST ${mainApiURL}/signup -> create and return a new user`, async () => {

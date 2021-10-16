@@ -5,6 +5,7 @@ import developersApiRouter from './developer.api';
 import genresApiRouter from './genre.api';
 import featuresApiRouter from './feature.api';
 import usersApiRouter from './user.api';
+import gamesApiRouter from './game.api';
 
 const router = express.Router();
 
@@ -19,5 +20,7 @@ router.use('/genres', genresApiRouter);
 router.use('/features', featuresApiRouter);
 
 router.use('/users', usersApiRouter);
+
+router.use('/games', gamesApiRouter);
 
 export default router;

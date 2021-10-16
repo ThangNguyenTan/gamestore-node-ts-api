@@ -3,7 +3,9 @@ import db from '../../config/database.config';
 
 describe('Users Services', () => {
   beforeAll(async () => {
-    await db.sync();
+    await db.sync({
+      logging: false,
+    });
   });
 
   test(`User Signup Function`, async () => {

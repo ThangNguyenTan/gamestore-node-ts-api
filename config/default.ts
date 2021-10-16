@@ -18,6 +18,12 @@ dotenv.config({ path: path.join(__dirname, '../', `${createEnvAccessPoint()}`) }
 module.exports = {
   port: process.env.PORT || '5000',
   node_env: process.env.NODE_ENV!.replace(/\W/g, '') || 'production',
+  allow_logging:
+    process.env.NODE_ENV &&
+    (process.env.NODE_ENV.replace(/\W/g, '') === 'test' ||
+      process.env.NODE_ENV.replace(/\W/g, '') === 'production')
+      ? false
+      : true,
   jwt_secret: process.env.JWT_SECRET || 'secret',
   jwt_expired_date: process.env.JWT_EXPIRED_DATE || '30d',
   root_path: rootPath,
