@@ -54,4 +54,5 @@ class Middleware {
 
 const Middlewares = new Middleware();
 
+export * from './jwt.middleware';
 export default Middlewares;
