@@ -9,10 +9,10 @@ export const validateCreateGame = (req: Request, res: Response, next: NextFuncti
     gameTrailer: Joi.string().required(),
     gameDescription: Joi.string().required(),
     releaseDate: Joi.string().required(),
-    publisherId: Joi.number().required(),
-    developerId: Joi.number().required(),
-    featureId: Joi.number().required(),
-    genreId: Joi.number().required(),
+    PublisherInstanceId: Joi.number().required(),
+    DeveloperInstanceId: Joi.number().required(),
+    FeatureInstanceId: Joi.number().required(),
+    GenreInstanceId: Joi.number().required(),
   });
 
   Middlewares.validateRequest(req, next, schema);
@@ -25,10 +25,10 @@ export const validateUpdateGame = (req: Request, res: Response, next: NextFuncti
     gameTrailer: Joi.string().required(),
     gameDescription: Joi.string().required(),
     releaseDate: Joi.string().required(),
-    publisherId: Joi.number().required(),
-    developerId: Joi.number().required(),
-    featureId: Joi.number().required(),
-    genreId: Joi.number().required(),
+    PublisherInstanceId: Joi.number().required(),
+    DeveloperInstanceId: Joi.number().required(),
+    FeatureInstanceId: Joi.number().required(),
+    GenreInstanceId: Joi.number().required(),
   });
 
   Middlewares.validateRequest(req, next, schema);

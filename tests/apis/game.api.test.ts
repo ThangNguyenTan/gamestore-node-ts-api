@@ -41,10 +41,10 @@ const invalidDataList = [
 ];
 
 let createdRecordID: number | undefined;
-let createdGenreID: number | undefined;
-let createdFeatureID: number | undefined;
-let createdDeveloperID: number | undefined;
-let createdPublisherID: number | undefined;
+let createdGenreInstanceId: number | undefined;
+let createdFeatureInstanceId: number | undefined;
+let createdDeveloperInstanceId: number | undefined;
+let createdPublisherInstanceId: number | undefined;
 
 describe('Games API', () => {
   beforeAll(async () => {
@@ -56,25 +56,25 @@ describe('Games API', () => {
     const newGenre = await createGenre({
       genreName: 'Test Genre 2',
     });
-    createdGenreID = newGenre?.getDataValue('id');
+    createdGenreInstanceId = newGenre?.getDataValue('id');
 
     // Create Feature
     const newFeature = await createFeature({
       featureName: 'Test Feature 2',
     });
-    createdFeatureID = newFeature?.getDataValue('id');
+    createdFeatureInstanceId = newFeature?.getDataValue('id');
 
     // Create Publisher
     const newPublisher = await createPublisher({
       publisherName: 'Test Publisher 2',
     });
-    createdPublisherID = newPublisher?.getDataValue('id');
+    createdPublisherInstanceId = newPublisher?.getDataValue('id');
 
     // Create Developer
     const newDeveloper = await createDeveloper({
       developerName: 'Test Developer 2',
     });
-    createdDeveloperID = newDeveloper?.getDataValue('id');
+    createdDeveloperInstanceId = newDeveloper?.getDataValue('id');
   });
 
   test(`POST ${mainApiURL} -> create and return a new game`, async () => {
@@ -84,10 +84,10 @@ describe('Games API', () => {
       gameTrailer: 'Test Game 2',
       gameDescription: 'Test Game 2',
       releaseDate: '2021-10-11',
-      publisherId: createdPublisherID!,
-      developerId: createdDeveloperID!,
-      featureId: createdFeatureID!,
-      genreId: createdGenreID!,
+      PublisherInstanceId: createdPublisherInstanceId!,
+      DeveloperInstanceId: createdDeveloperInstanceId!,
+      FeatureInstanceId: createdFeatureInstanceId!,
+      GenreInstanceId: createdGenreInstanceId!,
     };
 
     const response = await request(app)
@@ -106,10 +106,10 @@ describe('Games API', () => {
         gameTrailer: expect.any(String),
         gameDescription: expect.any(String),
         releaseDate: expect.any(String),
-        publisherId: expect.any(Number),
-        featureId: expect.any(Number),
-        developerId: expect.any(Number),
-        genreId: expect.any(Number),
+        PublisherInstanceId: expect.any(Number),
+        FeatureInstanceId: expect.any(Number),
+        DeveloperInstanceId: expect.any(Number),
+        GenreInstanceId: expect.any(Number),
       })
     );
   });
@@ -148,10 +148,10 @@ describe('Games API', () => {
           gameTrailer: expect.any(String),
           gameDescription: expect.any(String),
           releaseDate: expect.any(String),
-          publisherId: expect.any(Number),
-          featureId: expect.any(Number),
-          developerId: expect.any(Number),
-          genreId: expect.any(Number),
+          PublisherInstanceId: expect.any(Number),
+          FeatureInstanceId: expect.any(Number),
+          DeveloperInstanceId: expect.any(Number),
+          GenreInstanceId: expect.any(Number),
         }),
       ])
     );
@@ -171,10 +171,10 @@ describe('Games API', () => {
         gameTrailer: expect.any(String),
         gameDescription: expect.any(String),
         releaseDate: expect.any(String),
-        publisherId: expect.any(Number),
-        featureId: expect.any(Number),
-        developerId: expect.any(Number),
-        genreId: expect.any(Number),
+        PublisherInstanceId: expect.any(Number),
+        FeatureInstanceId: expect.any(Number),
+        DeveloperInstanceId: expect.any(Number),
+        GenreInstanceId: expect.any(Number),
       })
     );
   });
@@ -214,10 +214,10 @@ describe('Games API', () => {
       gameTrailer: 'Test Game 234',
       gameDescription: 'Test Game 234',
       releaseDate: '2021-10-13',
-      publisherId: createdPublisherID!,
-      developerId: createdDeveloperID!,
-      featureId: createdFeatureID!,
-      genreId: createdGenreID!,
+      PublisherInstanceId: createdPublisherInstanceId!,
+      DeveloperInstanceId: createdDeveloperInstanceId!,
+      FeatureInstanceId: createdFeatureInstanceId!,
+      GenreInstanceId: createdGenreInstanceId!,
     };
 
     const response = await request(app)
@@ -234,10 +234,10 @@ describe('Games API', () => {
         gameTrailer: expect.any(String),
         gameDescription: expect.any(String),
         releaseDate: expect.any(String),
-        publisherId: expect.any(Number),
-        featureId: expect.any(Number),
-        developerId: expect.any(Number),
-        genreId: expect.any(Number),
+        PublisherInstanceId: expect.any(Number),
+        FeatureInstanceId: expect.any(Number),
+        DeveloperInstanceId: expect.any(Number),
+        GenreInstanceId: expect.any(Number),
       })
     );
   });
@@ -256,10 +256,10 @@ describe('Games API', () => {
         gameTrailer: expect.any(String),
         gameDescription: expect.any(String),
         releaseDate: expect.any(String),
-        publisherId: expect.any(Number),
-        featureId: expect.any(Number),
-        developerId: expect.any(Number),
-        genreId: expect.any(Number),
+        PublisherInstanceId: expect.any(Number),
+        FeatureInstanceId: expect.any(Number),
+        DeveloperInstanceId: expect.any(Number),
+        GenreInstanceId: expect.any(Number),
       })
     );
   });

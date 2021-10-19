@@ -1,8 +1,18 @@
-import { GameInstance, GameAttributes } from '../models';
+import {
+  GameInstance,
+  GameAttributes,
+  FeatureInstance,
+  GenreInstance,
+  DeveloperInstance,
+  PublisherInstance,
+} from '../models';
 import { FindOptions } from 'sequelize';
 
 export const findGames = async (options?: FindOptions<GameAttributes>): Promise<GameInstance[]> => {
-  const games = await GameInstance.findAll(options);
+  const games = await GameInstance.findAll({
+    ...options,
+    include: [FeatureInstance, GenreInstance, DeveloperInstance, PublisherInstance],
+  });
 
   return games;
 };
@@ -20,10 +30,10 @@ export const createGame = async (newGame: GameAttributes): Promise<GameInstance>
     gameTrailer,
     gameDescription,
     releaseDate,
-    publisherId,
-    developerId,
-    featureId,
-    genreId,
+    PublisherInstanceId,
+    DeveloperInstanceId,
+    FeatureInstanceId,
+    GenreInstanceId,
   } = newGame;
   const createdGame = await GameInstance.create({
     gameName,
@@ -31,10 +41,10 @@ export const createGame = async (newGame: GameAttributes): Promise<GameInstance>
     gameTrailer,
     gameDescription,
     releaseDate,
-    publisherId,
-    developerId,
-    featureId,
-    genreId,
+    PublisherInstanceId,
+    DeveloperInstanceId,
+    FeatureInstanceId,
+    GenreInstanceId,
   });
 
   return createdGame;
@@ -51,10 +61,10 @@ export const updateGame = async (
     gameTrailer,
     gameDescription,
     releaseDate,
-    publisherId,
-    developerId,
-    featureId,
-    genreId,
+    PublisherInstanceId,
+    DeveloperInstanceId,
+    FeatureInstanceId,
+    GenreInstanceId,
   } = modifiedGame;
 
   if (!game) {
@@ -67,10 +77,10 @@ export const updateGame = async (
     gameTrailer,
     gameDescription,
     releaseDate,
-    publisherId,
-    developerId,
-    featureId,
-    genreId,
+    PublisherInstanceId,
+    DeveloperInstanceId,
+    FeatureInstanceId,
+    GenreInstanceId,
   });
 
   return game;

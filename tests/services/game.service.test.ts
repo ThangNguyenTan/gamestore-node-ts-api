@@ -14,10 +14,10 @@ import moment from 'moment';
 
 describe('Games Services', () => {
   let createdRecordID: number | undefined;
-  let createdGenreID: number | undefined;
-  let createdFeatureID: number | undefined;
-  let createdDeveloperID: number | undefined;
-  let createdPublisherID: number | undefined;
+  let createdGenreInstanceId: number | undefined;
+  let createdFeatureInstanceId: number | undefined;
+  let createdDeveloperInstanceId: number | undefined;
+  let createdPublisherInstanceId: number | undefined;
 
   beforeAll(async () => {
     await db.sync({
@@ -28,25 +28,25 @@ describe('Games Services', () => {
     const newGenre = await createGenre({
       genreName: 'Test Genre 1',
     });
-    createdGenreID = newGenre?.getDataValue('id');
+    createdGenreInstanceId = newGenre?.getDataValue('id');
 
     // Create Feature
     const newFeature = await createFeature({
       featureName: 'Test Feature 1',
     });
-    createdFeatureID = newFeature?.getDataValue('id');
+    createdFeatureInstanceId = newFeature?.getDataValue('id');
 
     // Create Publisher
     const newPublisher = await createPublisher({
       publisherName: 'Test Publisher 1',
     });
-    createdPublisherID = newPublisher?.getDataValue('id');
+    createdPublisherInstanceId = newPublisher?.getDataValue('id');
 
     // Create Developer
     const newDeveloper = await createDeveloper({
       developerName: 'Test Developer 1',
     });
-    createdDeveloperID = newDeveloper?.getDataValue('id');
+    createdDeveloperInstanceId = newDeveloper?.getDataValue('id');
   });
 
   test(`Create Game Function`, async () => {
@@ -56,10 +56,10 @@ describe('Games Services', () => {
       gameTrailer: 'Test Game 1',
       gameDescription: 'Test Game 1',
       releaseDate: '2021-09-11',
-      publisherId: createdPublisherID!,
-      developerId: createdDeveloperID!,
-      featureId: createdFeatureID!,
-      genreId: createdGenreID!,
+      PublisherInstanceId: createdPublisherInstanceId!,
+      DeveloperInstanceId: createdDeveloperInstanceId!,
+      FeatureInstanceId: createdFeatureInstanceId!,
+      GenreInstanceId: createdGenreInstanceId!,
     };
 
     const newGame = await createGame(gameData);
@@ -73,10 +73,10 @@ describe('Games Services', () => {
     expect(moment(newGame.getDataValue('releaseDate')).format('YYYY-MM-DD')).toEqual(
       gameData.releaseDate
     );
-    expect(newGame.getDataValue('publisherId')).toEqual(gameData.publisherId);
-    expect(newGame.getDataValue('developerId')).toEqual(gameData.developerId);
-    expect(newGame.getDataValue('featureId')).toEqual(gameData.featureId);
-    expect(newGame.getDataValue('genreId')).toEqual(gameData.genreId);
+    expect(newGame.getDataValue('PublisherInstanceId')).toEqual(gameData.PublisherInstanceId);
+    expect(newGame.getDataValue('DeveloperInstanceId')).toEqual(gameData.DeveloperInstanceId);
+    expect(newGame.getDataValue('FeatureInstanceId')).toEqual(gameData.FeatureInstanceId);
+    expect(newGame.getDataValue('GenreInstanceId')).toEqual(gameData.GenreInstanceId);
   });
 
   test(`Get All Games Function`, async () => {
@@ -91,10 +91,10 @@ describe('Games Services', () => {
           gameTrailer: expect.any(String),
           gameDescription: expect.any(String),
           releaseDate: expect.any(Date),
-          publisherId: expect.any(Number),
-          featureId: expect.any(Number),
-          developerId: expect.any(Number),
-          genreId: expect.any(Number),
+          PublisherInstanceId: expect.any(Number),
+          FeatureInstanceId: expect.any(Number),
+          DeveloperInstanceId: expect.any(Number),
+          GenreInstanceId: expect.any(Number),
         }),
       ])
     );
@@ -111,10 +111,10 @@ describe('Games Services', () => {
         gameTrailer: expect.any(String),
         gameDescription: expect.any(String),
         releaseDate: expect.any(Date),
-        publisherId: expect.any(Number),
-        featureId: expect.any(Number),
-        developerId: expect.any(Number),
-        genreId: expect.any(Number),
+        PublisherInstanceId: expect.any(Number),
+        FeatureInstanceId: expect.any(Number),
+        DeveloperInstanceId: expect.any(Number),
+        GenreInstanceId: expect.any(Number),
       })
     );
   });
@@ -126,10 +126,10 @@ describe('Games Services', () => {
       gameTrailer: 'Test Game 123',
       gameDescription: 'Test Game 123',
       releaseDate: '2021-09-12',
-      publisherId: createdPublisherID!,
-      developerId: createdDeveloperID!,
-      featureId: createdFeatureID!,
-      genreId: createdGenreID!,
+      PublisherInstanceId: createdPublisherInstanceId!,
+      DeveloperInstanceId: createdDeveloperInstanceId!,
+      FeatureInstanceId: createdFeatureInstanceId!,
+      GenreInstanceId: createdGenreInstanceId!,
     };
 
     const updatedGame = await updateGame(createdRecordID!, modifiedGameData);
@@ -141,10 +141,16 @@ describe('Games Services', () => {
     expect(moment(updatedGame?.getDataValue('releaseDate')).format('YYYY-MM-DD')).toEqual(
       modifiedGameData.releaseDate
     );
-    expect(updatedGame?.getDataValue('publisherId')).toEqual(modifiedGameData.publisherId);
-    expect(updatedGame?.getDataValue('developerId')).toEqual(modifiedGameData.developerId);
-    expect(updatedGame?.getDataValue('featureId')).toEqual(modifiedGameData.featureId);
-    expect(updatedGame?.getDataValue('genreId')).toEqual(modifiedGameData.genreId);
+    expect(updatedGame?.getDataValue('PublisherInstanceId')).toEqual(
+      modifiedGameData.PublisherInstanceId
+    );
+    expect(updatedGame?.getDataValue('DeveloperInstanceId')).toEqual(
+      modifiedGameData.DeveloperInstanceId
+    );
+    expect(updatedGame?.getDataValue('FeatureInstanceId')).toEqual(
+      modifiedGameData.FeatureInstanceId
+    );
+    expect(updatedGame?.getDataValue('GenreInstanceId')).toEqual(modifiedGameData.GenreInstanceId);
   });
 
   test(`Delete Game Function`, async () => {

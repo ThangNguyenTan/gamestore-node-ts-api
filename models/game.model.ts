@@ -8,10 +8,10 @@ export interface GameAttributes {
   gameTrailer: string;
   gameDescription: string;
   releaseDate: string;
-  publisherId: number;
-  developerId: number;
-  featureId: number;
-  genreId: number;
+  PublisherInstanceId: number;
+  GenreInstanceId: number;
+  FeatureInstanceId: number;
+  DeveloperInstanceId: number;
 }
 
 export class GameInstance extends Model<GameAttributes> {}
@@ -44,19 +44,19 @@ GameInstance.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    publisherId: {
+    PublisherInstanceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    developerId: {
+    GenreInstanceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    genreId: {
+    FeatureInstanceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    featureId: {
+    DeveloperInstanceId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
