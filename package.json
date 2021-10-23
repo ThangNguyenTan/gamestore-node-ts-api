@@ -12,7 +12,7 @@
     "test:coverage": "jest --detectOpenHandles --collectCoverage",
     "seed": "npx sequelize-cli db:seed:all",
     "pretest": "del /Q/S sqlite",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts --quiet --fix"
   },
   "keywords": [],
   "author": "",

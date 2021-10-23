@@ -18,7 +18,10 @@ export const findGames = async (options?: FindOptions<GameAttributes>): Promise<
 };
 
 export const getGame = async (id: number): Promise<GameInstance | null> => {
-  const game = await GameInstance.findOne({ where: { id } });
+  const game = await GameInstance.findOne({
+    where: { id },
+    include: [FeatureInstance, GenreInstance, DeveloperInstance, PublisherInstance],
+  });
 
   return game;
 };

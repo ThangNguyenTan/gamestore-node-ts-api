@@ -38,6 +38,7 @@ class GameController {
     }
 
     const updatedRecord = await updateGame(parseInt(id, 10), { ...req.body });
+
     return res.status(StatusCodes.OK).json(updatedRecord);
   }
 

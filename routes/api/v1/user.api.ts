@@ -5,6 +5,8 @@ import { validateUserLogin, validateUserSignup } from '../../../validations';
 
 const router = express.Router();
 
+router.get('/', asyncHandler(UserController.readPagination));
+
 router.post('/login', validateUserLogin, asyncHandler(UserController.login));
 
 router.post('/signup', validateUserSignup, asyncHandler(UserController.signup));

@@ -1,11 +1,20 @@
 import { NextFunction, Request, Response } from 'express';
-import { userSignup } from '../services';
+import { userSignup, findUsers } from '../services';
 import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
 import { UserInstance } from '../models';
 import { generateJWTToken, compare } from '../utils';
 
 class UserController {
+  async readPagination(req: Request, res: Response) {
+    const limit = (req.query.limit as number | undefined) || 10;
+    const offset = req.query.offset as number | undefined;
+
+    const records = await findUsers({ where: {}, limit, offset });
+
+    return res.status(StatusCodes.OK).json(records);
+  }
+
   async signup(req: Request, res: Response, next: NextFunction) {
     const { username, email, password } = req.body;
 
@@ -43,9 +52,7 @@ class UserController {
     });
 
     if (!existedUser || !compare(password, existedUser.getDataValue('password'))) {
-      return next(
-        createError(StatusCodes.BAD_REQUEST, 'Please enter a valid email or password')
-      );
+      return next(createError(StatusCodes.BAD_REQUEST, 'Please enter a valid email or password'));
     }
 
     const user = existedUser;
