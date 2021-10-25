@@ -7,6 +7,7 @@ export interface GameAttributes {
   gamePoster: string;
   gameTrailer: string;
   gameDescription: string;
+  gamePrice: number;
   releaseDate: string;
   PublisherInstanceId: number;
   GenreInstanceId: number;
@@ -26,6 +27,10 @@ GameInstance.init(
     },
     gameName: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    gamePrice: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     gamePoster: {

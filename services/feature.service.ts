@@ -1,6 +1,12 @@
 import { FeatureInstance, FeatureAttributes } from '../models';
 import { FindOptions } from 'sequelize';
 
+export const getAllFeatures = async (): Promise<FeatureInstance[]> => {
+  const features = await FeatureInstance.findAll();
+
+  return features;
+};
+
 export const findFeatures = async (
   options?: FindOptions<FeatureAttributes>
 ): Promise<FeatureInstance[]> => {

@@ -7,14 +7,15 @@ import featuresApiRouter from './feature.api';
 import usersApiRouter from './user.api';
 import gamesApiRouter from './game.api';
 import seederApiRouter from './seeder.api';
+import { validateToken } from '../../../middlewares';
 
 const router = express.Router();
 
-router.use('/todos', todosApiRouter);
+router.use('/todos', validateToken, todosApiRouter);
 
-router.use('/publishers', publishersApiRouter);
+router.use('/publishers', validateToken, publishersApiRouter);
 
-router.use('/developers', developersApiRouter);
+router.use('/developers', validateToken, developersApiRouter);
 
 router.use('/genres', genresApiRouter);
 

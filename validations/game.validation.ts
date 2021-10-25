@@ -5,6 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 export const validateCreateGame = (req: Request, res: Response, next: NextFunction): void => {
   const schema = Joi.object({
     gameName: Joi.string().required().max(255),
+    gamePrice: Joi.number().required(),
     gamePoster: Joi.string().required(),
     gameTrailer: Joi.string().required(),
     gameDescription: Joi.string().required(),
@@ -21,6 +22,7 @@ export const validateCreateGame = (req: Request, res: Response, next: NextFuncti
 export const validateUpdateGame = (req: Request, res: Response, next: NextFunction): void => {
   const schema = Joi.object({
     gameName: Joi.string().required().max(255),
+    gamePrice: Joi.number().required(),
     gamePoster: Joi.string().required(),
     gameTrailer: Joi.string().required(),
     gameDescription: Joi.string().required(),

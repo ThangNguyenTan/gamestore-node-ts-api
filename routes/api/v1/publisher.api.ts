@@ -5,7 +5,9 @@ import { validateCreatePublisher, validateUpdatePublisher } from '../../../valid
 
 const router = express.Router();
 
-router.get('/', asyncHandler(PublisherController.readPagination));
+router.get('/', asyncHandler(PublisherController.getAll));
+
+router.get('/find', asyncHandler(PublisherController.readPagination));
 
 router.post('/', validateCreatePublisher, asyncHandler(PublisherController.create));
 

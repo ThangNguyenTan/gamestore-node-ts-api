@@ -3,6 +3,7 @@ import { GameInstance } from '../models';
 const gameData = [
   {
     gameName: 'KINGDOM HEARTS HD 2.8 Final Chapter Prologue',
+    gamePrice: 9.99,
     gamePoster:
       'https://cdn1.epicgames.com/c8ff067c1c984cd7ab1998e8a9afc8b6/offer/EGS_KINGDOMHEARTSHD28FinalChapterPrologue_SquareEnix_S6-1200x1600-a3fc8fc218fe1ff3541dc2b5b9f076d7.jpg?h=854&resize=1&w=640',
     gameTrailer: 'https://www.youtube.com/embed/4gKAR0uRZZ0',
@@ -18,6 +19,7 @@ const gameData = [
   },
   {
     gameName: 'NBA 2K21',
+    gamePrice: 29.99,
     gamePoster:
       'https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_NBA2K21_VisualConcepts_S2_1200x1600-2fed3198782328f4f59194ebd5e54680?h=854&resize=1&w=640',
     gameTrailer: 'https://www.youtube.com/embed/RJ_bxl5DwkM',
@@ -30,6 +32,7 @@ const gameData = [
   },
   {
     gameName: 'Red Dead Redemption 2',
+    gamePrice: 39.99,
     gamePoster:
       'https://cdn1.epicgames.com/epic/offer/RDR2PC1227_Epic Games_860x1148-860x1148-b4c2210ee0c3c3b843a8de399bfe7f5c.jpg?h=854&resize=1&w=640',
     gameTrailer: 'https://www.youtube.com/embed/eaW0tYpxyp0',
@@ -45,6 +48,7 @@ const gameData = [
   },
   {
     gameName: `Assassin's Creed Origins`,
+    gamePrice: 19.99,
     gamePoster:
       'https://cdn1.epicgames.com/undefined/offer/S2_ACOD-1280x1440-621a727d381ffe0cffe869c1e23bc741.jpg?h=854&resize=1&w=640',
     gameTrailer: 'https://www.youtube.com/embed/cK4iAjzAoas',

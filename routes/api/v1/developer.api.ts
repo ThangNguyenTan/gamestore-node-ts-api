@@ -5,7 +5,9 @@ import { validateCreateDeveloper, validateUpdateDeveloper } from '../../../valid
 
 const router = express.Router();
 
-router.get('/', asyncHandler(DeveloperController.readPagination));
+router.get('/', asyncHandler(DeveloperController.getAll));
+
+router.get('/find', asyncHandler(DeveloperController.readPagination));
 
 router.post('/', validateCreateDeveloper, asyncHandler(DeveloperController.create));
 

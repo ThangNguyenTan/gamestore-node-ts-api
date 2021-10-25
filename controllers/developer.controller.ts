@@ -5,6 +5,7 @@ import {
   createDeveloper,
   updateDeveloper,
   deleteDeveloper,
+  getAllDevelopers,
 } from '../services';
 import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
@@ -13,6 +14,12 @@ class DeveloperController {
   async create(req: Request, res: Response) {
     const record = await createDeveloper({ ...req.body });
     return res.status(StatusCodes.CREATED).json(record);
+  }
+
+  async getAll(req: Request, res: Response) {
+    const records = await getAllDevelopers();
+
+    return res.status(StatusCodes.OK).json(records);
   }
 
   async readPagination(req: Request, res: Response) {

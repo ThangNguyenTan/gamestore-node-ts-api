@@ -1,5 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { getGenre, findGenres, createGenre, updateGenre, deleteGenre } from '../services';
+import {
+  getGenre,
+  findGenres,
+  createGenre,
+  updateGenre,
+  deleteGenre,
+  getAllGenres,
+} from '../services';
 import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
 
@@ -7,6 +14,12 @@ class GenreController {
   async create(req: Request, res: Response) {
     const record = await createGenre({ ...req.body });
     return res.status(StatusCodes.CREATED).json(record);
+  }
+
+  async getAll(req: Request, res: Response) {
+    const records = await getAllGenres();
+
+    return res.status(StatusCodes.OK).json(records);
   }
 
   async readPagination(req: Request, res: Response) {

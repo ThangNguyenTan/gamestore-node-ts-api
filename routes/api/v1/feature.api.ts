@@ -2,17 +2,20 @@ import express from 'express';
 import { FeatureController } from '../../../controllers';
 import asyncHandler from 'express-async-handler';
 import { validateCreateFeature, validateUpdateFeature } from '../../../validations';
+import { validateToken } from '../../../middlewares';
 
 const router = express.Router();
 
-router.get('/', asyncHandler(FeatureController.readPagination));
+router.get('/', asyncHandler(FeatureController.getAll));
 
-router.post('/', validateCreateFeature, asyncHandler(FeatureController.create));
+router.get('/find', validateToken, asyncHandler(FeatureController.readPagination));
 
-router.get('/:id', asyncHandler(FeatureController.readByID));
+router.post('/', validateToken, validateCreateFeature, asyncHandler(FeatureController.create));
 
-router.put('/:id', validateUpdateFeature, asyncHandler(FeatureController.update));
+router.get('/:id', validateToken, asyncHandler(FeatureController.readByID));
 
-router.delete('/:id', asyncHandler(FeatureController.delete));
+router.put('/:id', validateToken, validateUpdateFeature, asyncHandler(FeatureController.update));
+
+router.delete('/:id', validateToken, asyncHandler(FeatureController.delete));
 
 export default router;

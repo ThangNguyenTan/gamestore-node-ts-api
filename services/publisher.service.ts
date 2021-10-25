@@ -1,6 +1,12 @@
 import { PublisherInstance, PublisherAttributes } from '../models';
 import { FindOptions } from 'sequelize';
 
+export const getAllPublishers = async (): Promise<PublisherInstance[]> => {
+  const publishers = await PublisherInstance.findAll();
+
+  return publishers;
+};
+
 export const findPublishers = async (
   options?: FindOptions<PublisherAttributes>
 ): Promise<PublisherInstance[]> => {

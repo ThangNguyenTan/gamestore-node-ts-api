@@ -2,10 +2,11 @@ import express from 'express';
 import { UserController } from '../../../controllers';
 import asyncHandler from 'express-async-handler';
 import { validateUserLogin, validateUserSignup } from '../../../validations';
+import { validateToken } from '../../../middlewares';
 
 const router = express.Router();
 
-router.get('/', asyncHandler(UserController.readPagination));
+router.get('/', validateToken, asyncHandler(UserController.readPagination));
 
 router.post('/login', validateUserLogin, asyncHandler(UserController.login));
 

@@ -1,5 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { getFeature, findFeatures, createFeature, updateFeature, deleteFeature } from '../services';
+import {
+  getFeature,
+  findFeatures,
+  createFeature,
+  updateFeature,
+  deleteFeature,
+  getAllFeatures,
+} from '../services';
 import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
 
@@ -7,6 +14,12 @@ class FeatureController {
   async create(req: Request, res: Response) {
     const record = await createFeature({ ...req.body });
     return res.status(StatusCodes.CREATED).json(record);
+  }
+
+  async getAll(req: Request, res: Response) {
+    const records = await getAllFeatures();
+
+    return res.status(StatusCodes.OK).json(records);
   }
 
   async readPagination(req: Request, res: Response) {

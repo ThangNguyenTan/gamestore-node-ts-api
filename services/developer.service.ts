@@ -1,6 +1,12 @@
 import { DeveloperInstance, DeveloperAttributes } from '../models';
 import { FindOptions } from 'sequelize';
 
+export const getAllDevelopers = async (): Promise<DeveloperInstance[]> => {
+  const developers = await DeveloperInstance.findAll();
+
+  return developers;
+};
+
 export const findDevelopers = async (
   options?: FindOptions<DeveloperAttributes>
 ): Promise<DeveloperInstance[]> => {

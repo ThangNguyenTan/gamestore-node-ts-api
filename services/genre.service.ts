@@ -1,6 +1,12 @@
 import { GenreInstance, GenreAttributes } from '../models';
 import { FindOptions } from 'sequelize';
 
+export const getAllGenres = async (): Promise<GenreInstance[]> => {
+  const genres = await GenreInstance.findAll();
+
+  return genres;
+};
+
 export const findGenres = async (
   options?: FindOptions<GenreAttributes>
 ): Promise<GenreInstance[]> => {

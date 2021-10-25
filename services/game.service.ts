@@ -8,8 +8,16 @@ import {
 } from '../models';
 import { FindOptions } from 'sequelize';
 
-export const findGames = async (options?: FindOptions<GameAttributes>): Promise<GameInstance[]> => {
-  const games = await GameInstance.findAll({
+export const getAllGames = async (): Promise<GameInstance[]> => {
+  const games = await GameInstance.findAll();
+
+  return games;
+};
+
+export const findGames = async (
+  options?: FindOptions<GameAttributes>
+): Promise<{ rows: GameInstance[]; count: number }> => {
+  const games = await GameInstance.findAndCountAll({
     ...options,
     include: [FeatureInstance, GenreInstance, DeveloperInstance, PublisherInstance],
   });
@@ -29,6 +37,7 @@ export const getGame = async (id: number): Promise<GameInstance | null> => {
 export const createGame = async (newGame: GameAttributes): Promise<GameInstance> => {
   const {
     gameName,
+    gamePrice,
     gamePoster,
     gameTrailer,
     gameDescription,
@@ -40,6 +49,7 @@ export const createGame = async (newGame: GameAttributes): Promise<GameInstance>
   } = newGame;
   const createdGame = await GameInstance.create({
     gameName,
+    gamePrice,
     gamePoster,
     gameTrailer,
     gameDescription,
@@ -60,6 +70,7 @@ export const updateGame = async (
   let game = await getGame(id);
   const {
     gameName,
+    gamePrice,
     gamePoster,
     gameTrailer,
     gameDescription,
@@ -76,6 +87,7 @@ export const updateGame = async (
 
   game = await game.update({
     gameName,
+    gamePrice,
     gamePoster,
     gameTrailer,
     gameDescription,
