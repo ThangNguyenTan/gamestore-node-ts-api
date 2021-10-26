@@ -5,3 +5,4 @@ export { default as GenreController } from './genre.controller';
 export { default as FeatureController } from './feature.controller';
 export { default as UserController } from './user.controller';
 export { default as GameController } from './game.controller';
+export { default as OrderController } from './order.controller';

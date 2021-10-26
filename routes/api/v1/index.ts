@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import todosApiRouter from './todo.api';
 import publishersApiRouter from './publisher.api';
 import developersApiRouter from './developer.api';
@@ -7,9 +7,17 @@ import featuresApiRouter from './feature.api';
 import usersApiRouter from './user.api';
 import gamesApiRouter from './game.api';
 import seederApiRouter from './seeder.api';
+import orderApiRouter from './order.api';
 import { validateToken } from '../../../middlewares';
+import config from 'config';
 
 const router = express.Router();
+
+router.get('/config/paypal', (req: Request, res: Response) => {
+  res.send(config.get('paypal_client_id') || 'sb');
+});
+
+router.use('/orders', validateToken, orderApiRouter);
 
 router.use('/todos', validateToken, todosApiRouter);
 

@@ -12,7 +12,7 @@ router.get('/find', asyncHandler(GameController.readPagination));
 
 router.post('/', validateToken, validateCreateGame, asyncHandler(GameController.create));
 
-router.get('/:id', validateToken, asyncHandler(GameController.readByID));
+router.get('/:id', asyncHandler(GameController.readByID));
 
 router.put('/:id', validateToken, validateUpdateGame, asyncHandler(GameController.update));
 

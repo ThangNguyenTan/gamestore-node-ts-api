@@ -6,3 +6,4 @@ export * from './genre.model';
 export * from './feature.model';
 export * from './user.model';
 export * from './game.model';
+export * from './order.model';

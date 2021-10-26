@@ -36,4 +36,5 @@ module.exports = {
     storage: process.env.DB_STORAGE,
     dialect: process.env.DB_CONNECTION,
   },
+  paypal_client_id: process.env.PAYPAL_CLIENT_ID,
 };
