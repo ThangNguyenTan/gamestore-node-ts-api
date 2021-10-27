@@ -36,6 +36,6 @@ module.exports = {
     storage: process.env.DB_STORAGE,
     dialect: process.env.DB_CONNECTION,
   },
-  database_url: process.env.DATABASE_URL,
+  database_url: process.env.DATABASE_URL || null,
   paypal_client_id: process.env.PAYPAL_CLIENT_ID,
 };

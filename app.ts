@@ -6,18 +6,11 @@ import logger from 'morgan';
 import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import config from 'config';
 
 import apiV1Router from './routes/api/v1';
 import indexRouter from './routes';
-import db from './config/database.config';
 
 const app = express();
-
-// Sync DB
-db.sync({
-  logging: config.get('allow_logging'),
-});
 
 // Middlewares
 app.use(cors());

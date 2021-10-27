@@ -7,6 +7,14 @@
 import http from 'http';
 import app from '../app';
 import debugLogger from '../logger/debug-logger';
+import config from 'config';
+import db from '../config/database.config';
+
+// Sync DB
+db.authenticate();
+db.sync({
+  logging: config.get('allow_logging'),
+});
 
 /**
  * Get port from environment and store in Express.
