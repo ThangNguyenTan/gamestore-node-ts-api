@@ -13,6 +13,7 @@ import indexRouter from './routes';
 import db from './config/database.config';
 
 const app = express();
+const PORT = config.get('port');
 
 // Sync DB
 try {
@@ -39,5 +40,7 @@ app.use('/api/v1', apiV1Router);
 
 // Error Handler
 app.use(Middlewares.defaultErrorHandler);
+
+app.listen(PORT, () => console.log(`hosting @${PORT}`));
 
 export default app;

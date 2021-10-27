@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && yarn start",
-    "start": "cross-env NODE_ENV=production node ./dist/bin/www",
-    "dev": "cross-env NODE_ENV=development DEBUG=* nodemon ./bin/www",
+    "start": "cross-env NODE_ENV=production node ./dist/app.js",
+    "dev": "cross-env NODE_ENV=development DEBUG=* nodemon ./app.ts",
     "test": "cross-env NODE_ENV=test DEBUG=false jest --detectOpenHandles --collectCoverage",
     "test:watch": "jest --detectOpenHandles --watchAll",
     "test:coverage": "jest --detectOpenHandles --collectCoverage",
