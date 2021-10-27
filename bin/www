@@ -34,7 +34,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val: any) {
+function normalizePort(val) {
   const innerPort = parseInt(val, 10);
 
   if (Number.isNaN(innerPort)) {
@@ -54,7 +54,7 @@ function normalizePort(val: any) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error: any) {
+function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
