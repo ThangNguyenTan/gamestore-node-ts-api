@@ -4,9 +4,8 @@
   "description": "Build an e-commerce rest API with Typescript + Express.js + Sequelize + Postgres",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && yarn start",
-    "start": "cross-env NODE_ENV=production node ./dist/app.js",
-    "dev": "cross-env NODE_ENV=development DEBUG=* nodemon ./app.ts",
+    "start": "cross-env NODE_ENV=production ts-node ./bin/www.ts",
+    "dev": "cross-env NODE_ENV=development DEBUG=* nodemon ./bin/www.ts",
     "test": "cross-env NODE_ENV=test DEBUG=false jest --detectOpenHandles --collectCoverage",
     "test:watch": "jest --detectOpenHandles --watchAll",
     "test:coverage": "jest --detectOpenHandles --collectCoverage",
