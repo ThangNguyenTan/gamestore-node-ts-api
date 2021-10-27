@@ -15,9 +15,13 @@ import db from './config/database.config';
 const app = express();
 
 // Sync DB
-db.sync({
-  logging: config.get('allow_logging'),
-});
+try {
+  db.sync({
+    logging: config.get('allow_logging'),
+  });
+} catch (error) {
+  console.log(error);
+}
 
 // Middlewares
 app.use(cors());
