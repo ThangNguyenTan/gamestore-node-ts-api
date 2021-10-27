@@ -1,0 +1,31 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const todo_api_1 = __importDefault(require("./todo.api"));
+const publisher_api_1 = __importDefault(require("./publisher.api"));
+const developer_api_1 = __importDefault(require("./developer.api"));
+const genre_api_1 = __importDefault(require("./genre.api"));
+const feature_api_1 = __importDefault(require("./feature.api"));
+const user_api_1 = __importDefault(require("./user.api"));
+const game_api_1 = __importDefault(require("./game.api"));
+const seeder_api_1 = __importDefault(require("./seeder.api"));
+const order_api_1 = __importDefault(require("./order.api"));
+const middlewares_1 = require("../../../middlewares");
+const config_1 = __importDefault(require("config"));
+const router = express_1.default.Router();
+router.get('/config/paypal', (req, res) => {
+    res.send(config_1.default.get('paypal_client_id') || 'sb');
+});
+router.use('/orders', middlewares_1.validateToken, order_api_1.default);
+router.use('/todos', middlewares_1.validateToken, todo_api_1.default);
+router.use('/publishers', middlewares_1.validateToken, publisher_api_1.default);
+router.use('/developers', middlewares_1.validateToken, developer_api_1.default);
+router.use('/genres', genre_api_1.default);
+router.use('/features', feature_api_1.default);
+router.use('/users', user_api_1.default);
+router.use('/games', game_api_1.default);
+router.use('/seed', seeder_api_1.default);
+exports.default = router;
