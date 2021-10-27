@@ -1,4 +1,10 @@
-import { OrderAttributes, OrderInstance, GameInstance } from '../models';
+import {
+  OrderAttributes,
+  OrderInstance,
+  GameInstance,
+  DeveloperInstance,
+  PublisherInstance,
+} from '../models';
 
 export const getIsInLibrary = async (
   userId: number,
@@ -9,7 +15,6 @@ export const getIsInLibrary = async (
       UserInstanceId: userId,
       GameInstanceId: gameId,
     },
-    include: [GameInstance],
   });
 
   return order;
@@ -20,7 +25,12 @@ export const getOrdersForLibrary = async (userId: number): Promise<OrderInstance
     where: {
       UserInstanceId: userId,
     },
-    include: [GameInstance],
+    include: [
+      {
+        model: GameInstance,
+        include: [DeveloperInstance, PublisherInstance],
+      },
+    ],
   });
 
   return orders;
