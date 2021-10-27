@@ -5,7 +5,6 @@
  */
 
 import http from 'http';
-import config from 'config';
 import app from '../app';
 import debugLogger from '../logger/debug-logger';
 
@@ -13,7 +12,7 @@ import debugLogger from '../logger/debug-logger';
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(config.get('port') || '5000');
+const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 /**
