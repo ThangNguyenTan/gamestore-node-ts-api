@@ -1,20 +1,19 @@
 import express from 'express';
 import { PublisherController } from '../../../controllers';
-import asyncHandler from 'express-async-handler';
 import { validateCreatePublisher, validateUpdatePublisher } from '../../../validations';
 
 const router = express.Router();
 
-router.get('/', asyncHandler(PublisherController.getAll));
+router.get('/', PublisherController.getAll);
 
-router.get('/find', asyncHandler(PublisherController.readPagination));
+router.get('/find', PublisherController.readPagination);
 
-router.post('/', validateCreatePublisher, asyncHandler(PublisherController.create));
+router.post('/', validateCreatePublisher, PublisherController.create);
 
-router.get('/:id', asyncHandler(PublisherController.readByID));
+router.get('/:id', PublisherController.readByID);
 
-router.put('/:id', validateUpdatePublisher, asyncHandler(PublisherController.update));
+router.put('/:id', validateUpdatePublisher, PublisherController.update);
 
-router.delete('/:id', asyncHandler(PublisherController.delete));
+router.delete('/:id', PublisherController.delete);
 
 export default router;

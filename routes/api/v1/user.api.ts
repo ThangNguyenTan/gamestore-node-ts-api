@@ -1,15 +1,14 @@
 import express from 'express';
 import { UserController } from '../../../controllers';
-import asyncHandler from 'express-async-handler';
 import { validateUserLogin, validateUserSignup } from '../../../validations';
 import { validateToken } from '../../../middlewares';
 
 const router = express.Router();
 
-router.get('/', validateToken, asyncHandler(UserController.readPagination));
+router.get('/', validateToken, UserController.readPagination);
 
-router.post('/login', validateUserLogin, asyncHandler(UserController.login));
+router.post('/login', validateUserLogin, UserController.login);
 
-router.post('/signup', validateUserSignup, asyncHandler(UserController.signup));
+router.post('/signup', validateUserSignup, UserController.signup);
 
 export default router;

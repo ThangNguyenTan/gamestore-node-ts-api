@@ -1,20 +1,19 @@
 import express from 'express';
 import { DeveloperController } from '../../../controllers';
-import asyncHandler from 'express-async-handler';
 import { validateCreateDeveloper, validateUpdateDeveloper } from '../../../validations';
 
 const router = express.Router();
 
-router.get('/', asyncHandler(DeveloperController.getAll));
+router.get('/', DeveloperController.getAll);
 
-router.get('/find', asyncHandler(DeveloperController.readPagination));
+router.get('/find', DeveloperController.readPagination);
 
-router.post('/', validateCreateDeveloper, asyncHandler(DeveloperController.create));
+router.post('/', validateCreateDeveloper, DeveloperController.create);
 
-router.get('/:id', asyncHandler(DeveloperController.readByID));
+router.get('/:id', DeveloperController.readByID);
 
-router.put('/:id', validateUpdateDeveloper, asyncHandler(DeveloperController.update));
+router.put('/:id', validateUpdateDeveloper, DeveloperController.update);
 
-router.delete('/:id', asyncHandler(DeveloperController.delete));
+router.delete('/:id', DeveloperController.delete);
 
 export default router;
