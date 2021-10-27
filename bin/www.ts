@@ -81,11 +81,5 @@ function onError(error: any) {
  */
 
 function onListening() {
-  if (config.get('node_env') === 'production') {
-    const addr = server.address() || '';
-    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-    debugLogger(`Server is running ${bind}`);
-  } else {
-    debugLogger(`Server is running on http://localhost:${port}`);
-  }
+  debugLogger(`Server is running on http://localhost:${port}`);
 }
