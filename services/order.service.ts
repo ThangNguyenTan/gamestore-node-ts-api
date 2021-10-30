@@ -4,7 +4,24 @@ import {
   GameInstance,
   DeveloperInstance,
   PublisherInstance,
+  UserInstance,
 } from '../models';
+
+export const getAllOrders = async (): Promise<OrderInstance[]> => {
+  const orders = await OrderInstance.findAll({
+    include: [
+      {
+        model: UserInstance,
+      },
+      {
+        model: GameInstance,
+        include: [DeveloperInstance, PublisherInstance],
+      },
+    ],
+  });
+
+  return orders;
+};
 
 export const getIsInLibrary = async (
   userId: number,

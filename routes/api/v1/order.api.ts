@@ -3,7 +3,9 @@ import { OrderController } from '../../../controllers';
 
 const router = express.Router();
 
-router.get('/', OrderController.getOrdersForLibrary);
+router.get('/', OrderController.getAll);
+
+router.get('/mine', OrderController.getOrdersForLibrary);
 
 router.get('/check/:gameId', OrderController.getIsInLibrary);
 

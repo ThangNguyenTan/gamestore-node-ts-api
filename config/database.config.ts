@@ -18,12 +18,6 @@ if (config.get('node_env') != 'test') {
       host: config.get('host'),
       dialect: config.get('dialect'),
       port: 5432,
-      dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        },
-      },
     });
   }
 }

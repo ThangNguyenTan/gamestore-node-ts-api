@@ -1,9 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
-import { createOrder, getIsInLibrary, getOrdersForLibrary } from '../services';
+import { createOrder, getIsInLibrary, getOrdersForLibrary, getAllOrders } from '../services';
 import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
 
 class OrderController {
+  async getAll(req: Request, res: Response) {
+    const records = await getAllOrders();
+
+    return res.status(StatusCodes.OK).json(records);
+  }
+
   async getOrdersForLibrary(req: Request, res: Response) {
     const records = await getOrdersForLibrary(req.user!.id!);
 

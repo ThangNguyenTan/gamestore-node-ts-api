@@ -6,3 +6,4 @@ export { default as FeatureController } from './feature.controller';
 export { default as UserController } from './user.controller';
 export { default as GameController } from './game.controller';
 export { default as OrderController } from './order.controller';
+export { default as WishlistController } from './wishlist.controller';

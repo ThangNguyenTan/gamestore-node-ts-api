@@ -8,6 +8,7 @@ import usersApiRouter from './user.api';
 import gamesApiRouter from './game.api';
 import seederApiRouter from './seeder.api';
 import orderApiRouter from './order.api';
+import wishlistApiRouter from './wishlist.api';
 import { validateToken } from '../../../middlewares';
 import config from 'config';
 
@@ -18,6 +19,8 @@ router.get('/config/paypal', (req: Request, res: Response) => {
 });
 
 router.use('/orders', validateToken, orderApiRouter);
+
+router.use('/wishlist', validateToken, wishlistApiRouter);
 
 router.use('/todos', validateToken, todosApiRouter);
 
