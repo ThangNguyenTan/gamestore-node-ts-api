@@ -81,7 +81,7 @@ describe('Games Services', () => {
   });
 
   test(`Get All Games Function`, async () => {
-    const games = await findGames();
+    const { rows: games } = await findGames();
 
     expect(games).toEqual(
       expect.arrayContaining([

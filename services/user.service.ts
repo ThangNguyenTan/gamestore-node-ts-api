@@ -1,9 +1,8 @@
-import { FindOptions } from 'sequelize';
 import { UserAttributes, UserInstance } from '../models';
 import { encrypt } from '../utils';
 
-export const findUsers = async (options?: FindOptions<UserAttributes>): Promise<UserInstance[]> => {
-  const genres = await UserInstance.findAll(options);
+export const findUsers = async (): Promise<UserInstance[]> => {
+  const genres = await UserInstance.findAll();
 
   return genres;
 };

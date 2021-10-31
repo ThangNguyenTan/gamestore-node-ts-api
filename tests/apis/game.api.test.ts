@@ -2,7 +2,14 @@
 import request from 'supertest';
 import app from '../../app';
 import db from '../../config/database.config';
-import { createGenre, createFeature, createPublisher, createDeveloper } from '../../services';
+import {
+  createGenre,
+  createFeature,
+  createPublisher,
+  createDeveloper,
+  userSignup,
+} from '../../services';
+import { generateJWTToken } from '../../utils';
 
 const mainApiURL = `/api/v1/games`;
 
@@ -45,11 +52,25 @@ let createdGenreInstanceId: number | undefined;
 let createdFeatureInstanceId: number | undefined;
 let createdDeveloperInstanceId: number | undefined;
 let createdPublisherInstanceId: number | undefined;
+let token: string;
 
 describe('Games API', () => {
   beforeAll(async () => {
     await db.sync({
       logging: false,
+    });
+
+    // Create Token
+    const createdUser = await userSignup({
+      username: 'feature1',
+      email: 'feature1@gmail.com',
+      password: 'feature1',
+    });
+    token = generateJWTToken({
+      id: createdUser.getDataValue('id'),
+      username: createdUser.getDataValue('username'),
+      email: createdUser.getDataValue('email'),
+      password: createdUser.getDataValue('password'),
     });
 
     // Create Genre
@@ -93,6 +114,7 @@ describe('Games API', () => {
 
     const response = await request(app)
       .post(`${mainApiURL}`)
+      .set('Authorization', `Bearer ${token}`)
       .send(newGame)
       .expect('Content-Type', /json/)
       .expect(201);
@@ -121,6 +143,7 @@ describe('Games API', () => {
 
       const response = await request(app)
         .post(`${mainApiURL}`)
+        .set('Authorization', `Bearer ${token}`)
         .send(currentData)
         .expect('Content-Type', /json/)
         .expect(422);
@@ -137,10 +160,11 @@ describe('Games API', () => {
   test(`GET ${mainApiURL} -> array of games`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}`)
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
-    expect(response.body).toEqual(
+    expect(response.body.games).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           id: expect.any(Number),
@@ -161,6 +185,7 @@ describe('Games API', () => {
   test(`GET ${mainApiURL}/id -> a game`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}/${createdRecordID}`)
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -183,6 +208,7 @@ describe('Games API', () => {
   test(`GET ${mainApiURL}/id -> 404 if not found`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}/9999`)
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(404);
 
@@ -197,6 +223,7 @@ describe('Games API', () => {
   test(`PUT ${mainApiURL}/id -> 404 if not found`, async () => {
     const response = await request(app)
       .get(`${mainApiURL}/9999`)
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(404);
 
@@ -224,6 +251,7 @@ describe('Games API', () => {
 
     const response = await request(app)
       .put(`${mainApiURL}/${createdRecordID}`)
+      .set('Authorization', `Bearer ${token}`)
       .send(modifiedGame)
       .expect('Content-Type', /json/)
       .expect(200);
@@ -247,6 +275,7 @@ describe('Games API', () => {
   test(`DELETE ${mainApiURL}/id -> return the deleted game`, async () => {
     const response = await request(app)
       .delete(`${mainApiURL}/${createdRecordID}`)
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200);
 
@@ -269,6 +298,7 @@ describe('Games API', () => {
   test(`DELETE ${mainApiURL}/id -> 404 if not found`, async () => {
     const response = await request(app)
       .delete(`${mainApiURL}/9999`)
+      .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(404);
 

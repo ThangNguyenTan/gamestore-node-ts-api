@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import todosApiRouter from './todo.api';
 import publishersApiRouter from './publisher.api';
 import developersApiRouter from './developer.api';
 import genresApiRouter from './genre.api';
@@ -21,8 +20,6 @@ router.get('/config/paypal', (req: Request, res: Response) => {
 router.use('/orders', validateToken, orderApiRouter);
 
 router.use('/wishlist', validateToken, wishlistApiRouter);
-
-router.use('/todos', validateToken, todosApiRouter);
 
 router.use('/publishers', validateToken, publishersApiRouter);
 

@@ -7,10 +7,7 @@ import { generateJWTToken, compare } from '../utils';
 
 class UserController {
   async readPagination(req: Request, res: Response) {
-    const limit = (req.query.limit as number | undefined) || 10;
-    const offset = req.query.offset as number | undefined;
-
-    const records = await findUsers({ where: {}, limit, offset });
+    const records = await findUsers();
 
     return res.status(StatusCodes.OK).json(records);
   }
